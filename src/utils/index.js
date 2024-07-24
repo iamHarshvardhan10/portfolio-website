@@ -1,68 +1,74 @@
-import { FaHome, FaShare, FaShoppingBasket, FaPen, FaScrewdriver, FaUser, FaVoicemail, FaInstagram, FaTwitter, FaYoutube, FaLinkedin, FaGithub } from 'react-icons/fa'
 
 export const NAVLINKS = [
     {
-        link: 'Home',
+        name: 'Home',
         path: '/',
-        icon: <FaHome />
+        icon: "VscDashboard"
     },
     {
-        link: 'Projects',
+        name: 'Projects',
         path: '/projects',
-        icon: <FaShare />
+        icon: "VscCode"
     },
     {
-        link: 'Boutique',
+        name: 'Boutique',
         path: '/boutique',
-        icon: <FaShoppingBasket />
+        icon: "VscGift"
     },
     {
-        link: 'Writing',
+        name: 'Writing',
         path: '/writing',
-        icon: <FaPen />
+        icon: "VscEdit"
     },
     {
-        link: 'Stack',
+        name: 'Stack',
         path: '/stack',
-        icon: <FaScrewdriver />
+        icon: "VscSymbolProperty"
     },
     {
-        link: 'About',
+        name: 'About',
         path: '/about',
-        icon: <FaUser />
+        icon: "VscAccount"
     },
     {
-        link: 'Contact',
+        name: 'Contact',
         path: '/contact',
-        icon: <FaVoicemail />
+        icon: "VscMail"
     }
 ]
 
 
-export const follow = [
+export const FOLLOW = [
     {
-        link: 'Twitter',
-        path: 'https://twitter.com/andrewjgill',
-        icon: <FaTwitter />
-    },
-    {
-        link: 'Instagram',
-        path: 'https://www.instagram.com/andrewjgill/',
-        icon: <FaInstagram />
-    },
-    {
-        link: 'Github',
-        path: 'https://github.com/andrewjgill',
-        icon: <FaGithub />
-    },
-    {
-        link: 'YouTube',
-        path: 'https://www.youtube.com/channel/UC7QY7j3Z6',
-        icon: <FaYoutube />
-    },
-    {
-        link: 'LinkedIn',
-        path: 'https://www.linkedin.com/in/andrewjgill',
-        icon: <FaLinkedin />
+        tag: 'follow',
+        followList: [
+
+
+            {
+                name: 'Twitter',
+                path: 'https://twitter.com/andrewjgill',
+                icon: "FaTwitter"
+            },
+            {
+                name: 'Instagram',
+                path: 'https://www.instagram.com/andrewjgill/',
+                icon: "FaInstagram"
+            },
+            {
+                name: 'Github',
+                path: 'https://github.com/andrewjgill',
+                icon: "FaGithub"
+            },
+            {
+                name: 'YouTube',
+                path: 'https://www.youtube.com/channel/UC7QY7j3Z6',
+                icon: "FaYoutube"
+            },
+            {
+                name: 'LinkedIn',
+                path: 'https://www.linkedin.com/in/andrewjgill',
+                icon: "FaLinkedin"
+            }
+        ]
     }
 ]
