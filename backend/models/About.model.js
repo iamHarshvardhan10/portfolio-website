@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const aboutSchema = mongoose.Schema({
+const aboutSchema =  new mongoose.Schema({
     title: {
         type: String,
         required: true,

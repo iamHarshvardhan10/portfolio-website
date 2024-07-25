@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const PortfolioSchema = mongoose.Schema({
+const PortfolioSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,

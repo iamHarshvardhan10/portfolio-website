@@ -1,5 +1,6 @@
 import { Portfolio } from "../models/Portfolio.model.js"
 import { About } from "../models/About.model.js"
+import { Stack } from "../models/Stack.model.js"
 
 
 // Intro Post Controllers
@@ -64,6 +65,38 @@ export const about = async (req, res) => {
             success: true,
             message: "About Section Created Successfully",
             data: about
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        })
+    }
+}
+
+// Stack Post controllers
+
+export const stack = async (req, res) => {
+    try {
+        // Destructuring from req body
+        const { stackName, stackDescription } = req.body;
+        // validating field
+        if (!stackName || !stackDescription) {
+            return res.status(400).json({
+                success: false,
+                message: 'All Field Required',
+            })
+        }
+        // creating stack section
+        const stack = await Stack.create({
+            stackName,
+            stackDescription
+        })
+        // returning res
+        return res.status(200).json({
+            success: true,
+            message: "Stack Section Created Successfully",
+            data: stack
         })
     } catch (error) {
         return res.status(500).json({
