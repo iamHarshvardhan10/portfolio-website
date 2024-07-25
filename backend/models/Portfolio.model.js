@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const IntroSchema = mongoose.Schema({
+const PortfolioSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: true,
@@ -10,13 +10,13 @@ const IntroSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    roles: [
-        {
-            type: String,
-            required: true,
-            trim: true
-        }
-    ],
+    roles:
+    {
+        type: [String],
+        required: true,
+        trim: true
+    }
+    ,
     bio: {
         type: String,
         required: true,
@@ -24,9 +24,8 @@ const IntroSchema = mongoose.Schema({
     },
     portfolioImage: {
         type: String,
-        required: true,
     }
 
 })
 
-export const Intro = mongoose.model('Intro', IntroSchema)
+export const Portfolio = mongoose.model('Portfolio', PortfolioSchema)

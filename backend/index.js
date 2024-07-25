@@ -3,11 +3,12 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
-
+// importing routes
+import portfolioRoute from './routes/Portfolio.route.js'
 
 
 const app = express()
-
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.json({
@@ -15,6 +16,9 @@ app.get('/', (req, res) => {
     })
 })
 
+
+// Defining routes
+app.use('/api/portfolio', portfolioRoute)
 
 
 app.listen(8080, () => {
