@@ -136,10 +136,20 @@ export const createProject = async (req, res) => {
             })
         }
 
-        const projectImageUrl = req.files.projectImageUrl
-        const image = await imageCloudinary(projectImageUrl, process.env.FOLDER_NAME)
+        if (!req.files || !req.files.projectImageUrl) {
+            return res.status(400).json({
+                success: false,
+                message: 'At least One file should uploaded'
+            })
+        }
 
+        const projectImageUrl = Array.isArray(req.files.projectImageUrl) ? req.files.projectImageUrl : [req.files.projectImageUrl]
 
+        const imageUploadPromises = projectImageUrl.map(file => imageCloudinary(file, process.env.FOLDER_NAME));
+        const imageUploadResults = await Promise.all(imageUploadPromises);
+
+        const projectImageUrls = imageUploadResults.map(result => result.secure_url);
+        console.log(projectImageUrls)
         // create project 
         const project = await Project.create({
             projectName,
@@ -147,7 +157,7 @@ export const createProject = async (req, res) => {
             projectLink,
             projectGithubLink,
             projectTechnologies,
-            projectImageUrl: image.secure_url
+            projectImageUrl: projectImageUrls
 
         })
 
@@ -158,6 +168,7 @@ export const createProject = async (req, res) => {
             data: project
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             success: false,
             message: 'Internal Server Error'
