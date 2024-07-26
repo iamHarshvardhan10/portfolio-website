@@ -200,13 +200,16 @@ export const createBlog = async (req, res) => {
             })
         }
 
+        const blogImage = req.files.blogImage;
+        const image = await imageCloudinary(blogImage, process.env.FOLDER_NAME);
+
         // create blog 
 
         const blog = await Blog.create({
             blogTitle,
             blogDescription,
-            blogTag
-
+            blogTag,
+            blogImage: image.secure_url
         })
 
         return res.status(200).json({
