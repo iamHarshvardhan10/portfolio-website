@@ -102,10 +102,17 @@ export const stack = async (req, res) => {
                 message: 'All Field Required',
             })
         }
+
+        // upload image
+
+        const stackLogo = req.files.stackLogo
+        const image = await imageCloudinary(stackLogo, process.env.FOLDER_NAME)
+
         // creating stack section
         const stack = await Stack.create({
             stackName,
-            stackDescription
+            stackDescription,
+            stackLogo: image.secure_url
         })
         // returning res
         return res.status(200).json({
