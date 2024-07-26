@@ -3,7 +3,9 @@ import { About } from "../models/About.model.js"
 import { Stack } from "../models/Stack.model.js"
 import { Project } from "../models/Project.model.js"
 import { Blog } from "../models/Blog.model.js"
-
+import dotenv from 'dotenv'
+import { imageCloudinary } from "../utils/imageCloudinary.js"
+dotenv.config()
 
 // Intro Post Controllers
 export const Intro = async (req, res) => {
@@ -18,13 +20,18 @@ export const Intro = async (req, res) => {
                 message: "Please fill all the fields"
             })
         }
+        // image uploading 
+        const portfolioImage = req.files.portfolioImage
+        const image = await imageCloudinary(portfolioImage, process.env.FOLDER_NAME)
 
+        console.log(image)
         // create portfolio Intro
         const intro = await Portfolio.create({
             firstName,
             email,
             roles,
-            bio
+            bio,
+            portfolioImage: image.secure_url
         })
 
         // return res
