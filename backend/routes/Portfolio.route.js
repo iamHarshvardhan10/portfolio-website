@@ -1,5 +1,5 @@
 import express from 'express'
-import { about, createBlog, createProject, Intro, stack } from '../controllers/Portfolio.controllers.js';
+import { about, createBlog, createProject, getPorfolioDetails, Intro, stack } from '../controllers/Portfolio.controllers.js';
 
 const router = express.Router()
 
@@ -17,4 +17,7 @@ router.post('/createproject', createProject)
 
 // Post route for blog
 router.post('/createblog', createBlog)
+
+// Get portfolio detail rotues
+router.get('/getportfolio', getPorfolioDetails)
 export default router;

@@ -12,8 +12,7 @@ const stackScheam = new mongoose.Schema({
     },
     stackLogo: {
         type: String,
-
     }
-})
+},{timestamps:true})
 
 export const Stack = mongoose.model('Stack' , stackScheam)

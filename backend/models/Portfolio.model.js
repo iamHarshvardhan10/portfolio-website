@@ -25,7 +25,6 @@ const PortfolioSchema = new mongoose.Schema({
     portfolioImage: {
         type: String,
     }
-
-})
+},{timestamps:true})
 
 export const Portfolio = mongoose.model('Portfolio', PortfolioSchema)

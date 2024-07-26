@@ -2,7 +2,6 @@ import { Portfolio } from "../models/Portfolio.model.js"
 import { About } from "../models/About.model.js"
 import { Stack } from "../models/Stack.model.js"
 import { Project } from "../models/Project.model.js"
-import { FaWineGlassEmpty } from "react-icons/fa6"
 import { Blog } from "../models/Blog.model.js"
 
 
@@ -38,6 +37,7 @@ export const Intro = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Internal Server Error",
+            error: error.message
         })
     }
 }
@@ -177,6 +177,36 @@ export const createBlog = async (req, res) => {
             success: true,
             message: "Blog Section Created Successfully",
             data: blog
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        })
+    }
+}
+
+
+// get porfolio details 
+
+export const getPorfolioDetails = async (req, res) => {
+    try {
+        const portfolio = await Portfolio.findOne().sort({ createdAt: -1 })
+        const about = await About.findOne().sort({ createdAt: -1 })
+        const stack = await Stack.find()
+        const projects = await Project.find()
+        const blogs = await Blog.find()
+        return res.status(200).json({
+            success: true,
+            message: "Portfolio Details",
+            data: {
+                portfolio,
+                about,
+                stack,
+                projects,
+                blogs
+            }
+
         })
     } catch (error) {
         return res.status(500).json({
