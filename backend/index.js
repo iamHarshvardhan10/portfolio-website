@@ -1,14 +1,30 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+
+import fileUpload from 'express-fileupload'
+import cors from 'cors'
 dotenv.config()
 
 // importing routes
 import portfolioRoute from './routes/Portfolio.route.js'
+import { cloudinaryConnection } from './config/cloudinary.config.js'
 
 
 const app = express()
 app.use(express.json())
+
+// file upload
+app.use(fileUpload(
+    {
+        useTempFiles: true,
+        tempFileDir: '/tmp/',
+    }
+))
+
+// cloudinary connection
+
+cloudinaryConnection()
 
 app.get('/', (req, res) => {
     res.json({
