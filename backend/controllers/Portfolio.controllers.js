@@ -64,10 +64,15 @@ export const about = async (req, res) => {
             })
         }
 
+        // upload image
+        const aboutImage = req.files.aboutImage
+        const image = await imageCloudinary(aboutImage, process.env.FOLDER_NAME)
+
         // creating about section
         const about = await About.create({
             title,
-            aboutContent
+            aboutContent,
+            aboutImage: image.secure_url
         })
 
         // returning res 
