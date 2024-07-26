@@ -136,13 +136,19 @@ export const createProject = async (req, res) => {
             })
         }
 
+        const projectImageUrl = req.files.projectImageUrl
+        const image = await imageCloudinary(projectImageUrl, process.env.FOLDER_NAME)
+
+
         // create project 
         const project = await Project.create({
             projectName,
             projectDescription,
             projectLink,
             projectGithubLink,
-            projectTechnologies
+            projectTechnologies,
+            projectImageUrl: image.secure_url
+
         })
 
         // return res 
