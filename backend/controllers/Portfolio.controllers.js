@@ -1,6 +1,7 @@
 import { Portfolio } from "../models/Portfolio.model.js"
 import { About } from "../models/About.model.js"
 import { Stack } from "../models/Stack.model.js"
+import { Project } from "../models/Project.model.js"
 
 
 // Intro Post Controllers
@@ -102,6 +103,44 @@ export const stack = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Internal Server Error",
+        })
+    }
+}
+
+
+// Project Post Controllers
+
+export const createProject = async (req, res) => {
+    try {
+        // Destructuring from req body
+        const { projectName, projectDescription, projectLink, projectGithubLink, projectTechnologies } = req.body
+        // validating field
+        if (!projectName || !projectDescription || !projectLink || !projectGithubLink || !projectTechnologies) {
+            return res.status(400).json({
+                success: false,
+                message: 'All Field Required',
+            })
+        }
+
+        // create project 
+        const project = await Project.create({
+            projectName,
+            projectDescription,
+            projectLink,
+            projectGithubLink,
+            projectTechnologies
+        })
+
+        // return res 
+        return res.status(200).json({
+            success: true,
+            message: "Project Section Created Successfully",
+            data: project
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
         })
     }
 }

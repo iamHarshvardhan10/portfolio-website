@@ -1,5 +1,5 @@
 import express from 'express'
-import { about, Intro, stack } from '../controllers/Portfolio.controllers.js';
+import { about, createProject, Intro, stack } from '../controllers/Portfolio.controllers.js';
 
 const router = express.Router()
 
@@ -12,4 +12,6 @@ router.post('/about', about)
 // Post Route for Stack
 router.post('/stack', stack)
 
+// Post Route for project
+router.post('/createproject', createProject)
 export default router;
