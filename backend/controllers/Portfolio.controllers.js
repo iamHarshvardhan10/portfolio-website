@@ -2,6 +2,8 @@ import { Portfolio } from "../models/Portfolio.model.js"
 import { About } from "../models/About.model.js"
 import { Stack } from "../models/Stack.model.js"
 import { Project } from "../models/Project.model.js"
+import { FaWineGlassEmpty } from "react-icons/fa6"
+import { Blog } from "../models/Blog.model.js"
 
 
 // Intro Post Controllers
@@ -136,6 +138,45 @@ export const createProject = async (req, res) => {
             success: true,
             message: "Project Section Created Successfully",
             data: project
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        })
+    }
+}
+
+
+// Blog post controllers
+
+export const createBlog = async (req, res) => {
+    try {
+        // destrcure from body
+        const { blogTitle, blogDescription, blogTag } = req.body
+
+        // validating field
+
+        if (!blogTitle || !blogDescription || !blogTag) {
+            return res.status(400).json({
+                success: false,
+                message: 'All Field Required'
+            })
+        }
+
+        // create blog 
+
+        const blog = await Blog.create({
+            blogTitle,
+            blogDescription,
+            blogTag
+
+        })
+
+        return res.status(200).json({
+            success: true,
+            message: "Blog Section Created Successfully",
+            data: blog
         })
     } catch (error) {
         return res.status(500).json({
