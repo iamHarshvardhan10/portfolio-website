@@ -5,7 +5,7 @@ const Sidebar = () => {
     <div className="relative flex min-h-[100vh]">
       <Sidenavigation />
       <div className="h-[100vh] flex-1 overflow-auto">
-        <div className="mx-auto w-11/12 max-w-[1000px] py-10">
+        <div className="py-[120px] px-[244px]">
           <Outlet />
         </div>
       </div>
