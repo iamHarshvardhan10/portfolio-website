@@ -7,6 +7,7 @@ import Stack from "./pages/Stack";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Sidebar from "./components/common/Sidebar";
+import ProjectPage from "./components/core/Project/ProjectPage";
 const App = () => {
   return (
     <>
@@ -14,7 +15,8 @@ const App = () => {
         <Routes>
           <Route element={<Sidebar />}>
             <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects" element={<Projects />}></Route>
+            <Route path="/projects/:id" element={<ProjectPage />} />
             <Route path="/boutique" element={<Boutique />} />
             <Route path="/writing" element={<Writing />} />
             <Route path="/stack" element={<Stack />} />
