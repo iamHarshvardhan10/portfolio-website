@@ -285,3 +285,31 @@ export const getSingleProject = async (req, res) => {
         })
     }
 }
+
+
+export const getSingleBlog = async (req, res) => {
+    try {
+        const { blogId } = req.params;
+
+        const blog = await Blog.findById(blogId)
+        if (!blog) {
+            return res.status(404).json({
+                success: false,
+                message: 'In valid Blog ID'
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'Blog Details',
+            data: blog
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+
+        })
+    }
+
+}
