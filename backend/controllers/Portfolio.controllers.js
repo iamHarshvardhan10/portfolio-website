@@ -254,3 +254,34 @@ export const getPorfolioDetails = async (req, res) => {
         })
     }
 }
+
+
+// get single project details 
+
+export const getSingleProject = async (req, res) => {
+    try {
+        // Destructure form req body
+        const { projectId } = req.params
+
+        const project = await Project.findById(projectId)
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: 'Project Not Found'
+
+            })
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'Project Details',
+            data: project
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Internal Server Error'
+        })
+    }
+}
