@@ -10,7 +10,7 @@ const BlogCard = ({ id, image, title, tag, created }) => {
         <div className="flex items-center justify-between gap-2">
           <p className="text-[16px] text-gray-500">{tag}</p>
 
-          <p className="text-[16px] text-gray-500">{created}</p>
+          <p className="text-[10px] text-gray-500">{created}</p>
 
         </div>
       </div>

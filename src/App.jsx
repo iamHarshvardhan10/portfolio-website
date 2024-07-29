@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Sidebar from "./components/common/Sidebar";
 import ProjectPage from "./components/core/Project/ProjectPage";
+import BlogPage from "./components/core/Blog/BlogPage";
 const App = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/projects/:projectId" element={<ProjectPage />} />
             <Route path="/boutique" element={<Boutique />} />
             <Route path="/writing" element={<Writing />} />
+            <Route path="writing/:blogId" element={<BlogPage />} />
             <Route path="/stack" element={<Stack />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
