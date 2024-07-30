@@ -10,11 +10,11 @@ export const NAVLINKS = [
         path: '/projects',
         icon: "VscCode"
     },
-    {
-        name: 'Boutique',
-        path: '/boutique',
-        icon: "VscGift"
-    },
+    // {
+    //     name: 'Boutique',
+    //     path: '/boutique',
+    //     icon: "VscGift"
+    // },
     {
         name: 'Writing',
         path: '/writing',
