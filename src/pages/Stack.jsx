@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import Footer from "../components/common/Footer";
 
 const Stack = () => {
   const [stack, setStack] = useState("");
@@ -51,6 +52,7 @@ const Stack = () => {
             </div>
           ))}
       </div>
+      <Footer/>
     </div>
   );
 };

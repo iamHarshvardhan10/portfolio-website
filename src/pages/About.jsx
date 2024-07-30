@@ -1,6 +1,7 @@
 import { useState } from "react";
 import aboutImageBanner from "../assets/aboutImageBanner.jpeg";
 import { useEffect } from "react";
+import Footer from "../components/common/Footer";
 
 const About = () => {
   const [aboutData, setAboutData] = useState("");
@@ -24,18 +25,21 @@ const About = () => {
     fetchData();
   }, []);
   return (
-    <div className="px-[24px]">
-      <h1 className="text-[48px] font-semibold">About Harshvardhan</h1>
-      <p className="text-[16px] font-medium mt-[16px]">{aboutData?.title}</p>
-      <img
-        src={aboutImageBanner}
-        alt="aboutBanner"
-        className="w-[720px] h-[450px] mt-[32px] rounded-[6px]"
-      />
-      <p className="mt-[32px] text-[14px] text-[#747679]">
-        {aboutData?.aboutContent}
-      </p>
-    </div>
+    <>
+      <div className="px-[24px]">
+        <h1 className="text-[48px] font-semibold">About Harshvardhan</h1>
+        <p className="text-[16px] font-medium mt-[16px]">{aboutData?.title}</p>
+        <img
+          src={aboutImageBanner}
+          alt="aboutBanner"
+          className="w-[720px] h-[450px] mt-[32px] rounded-[6px]"
+        />
+        <p className="mt-[32px] text-[14px] text-[#747679]">
+          {aboutData?.aboutContent}
+        </p>
+      </div>
+      <Footer/>
+    </>
   );
 };
 

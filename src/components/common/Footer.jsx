@@ -1,9 +1,15 @@
 const Footer = () => {
   return (
-    <footer className="flex">
-      <h3>All Rights are Reserved</h3>
-      <h3>Made by @harsh.devcodes</h3>
-      <span>2024 Portfolio</span>
+    <footer className="my-14 mx-4  flex items-center justify-around">
+      <h3 className="text-[14px]">
+        All Rights are <span className="text-gray-600 opacity-90">Reserved</span>
+      </h3>
+      <h3 className="text-[14px]">
+        Made by <span className="text-gray-600 opacity-90">@harsh.devcodes</span>
+      </h3>
+      <span className="text-[14px]">
+        2024 <span className="text-gray-600 opacity-90">Portfolio</span>
+      </span>
     </footer>
   );
 };

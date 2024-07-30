@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../components/core/Blog/BlogCard";
 import { formatDate } from "../utils/formatDate";
+import Footer from "../components/common/Footer";
 
 const Writing = () => {
   const [blogData, setBloData] = useState("");
@@ -48,6 +49,7 @@ const Writing = () => {
             />
           ))}
       </div>
+      <Footer/>
     </div>
   );
 };

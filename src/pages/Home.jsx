@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import IconBtn from "../components/common/IconBtn";
 import { FaClipboard, FaPhone } from "react-icons/fa";
+import Footer from "../components/common/Footer";
 
 const Home = () => {
   const [introData, setIntroData] = useState(null);
@@ -68,6 +69,7 @@ const Home = () => {
           icon={<FaClipboard />}
         />
       </div>
+      <Footer/>
     </div>
   );
 };
