@@ -12,7 +12,7 @@ export const Intro = async (req, res) => {
     try {
         // Destructuring from req body
         const { firstName, email, roles, bio } = req.body
-
+        console.log('check one')
         // validating user from body
         if (!firstName || !email || !roles || !bio) {
             return res.status(400).json({
@@ -22,9 +22,10 @@ export const Intro = async (req, res) => {
         }
         // image uploading 
         const portfolioImage = req.files.portfolioImage
+        console.log(portfolioImage)
         const image = await imageCloudinary(portfolioImage, process.env.FOLDER_NAME)
-
         console.log(image)
+
         // create portfolio Intro
         const intro = await Portfolio.create({
             firstName,
@@ -85,7 +86,7 @@ export const about = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Internal Server Error",
-            error:error.message
+            error: error.message
         })
     }
 }

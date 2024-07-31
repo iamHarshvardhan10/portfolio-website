@@ -50,7 +50,7 @@ const Home = () => {
           }}
         />
       </h2>
-      <p className="mt-[24px] text-[16px] font-medium w-[70%]">
+      <p className="mt-[24px] text-[14px] text-gray-600 font-medium w-[80%]">
         {introData?.data?.portfolio?.bio}
       </p>
       <div className="flex items-center gap-4">
