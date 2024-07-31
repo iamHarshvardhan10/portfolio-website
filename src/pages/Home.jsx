@@ -56,7 +56,7 @@ const Home = () => {
       <div className="flex items-center gap-4">
         <IconBtn
           onClick={handleClick}
-          text={"contact"}
+          text={"Contact"}
           bg={true}
           type={"button"}
           icon={<FaPhone />}

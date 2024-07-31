@@ -10,3 +10,13 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.light {
+  background-color: #fff;
+}
+
+.dark {
+  background-color: black;
+  color: white;
+}
+
