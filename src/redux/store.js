@@ -1,10 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import themeReducer from './slices/themeSlice';
-const store = configureStore({
-    reducer: {
-        theme: themeReducer
-    }
+import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react
+
+const rootReducer = combineReducers({ theme: themeReducer })
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    version: 1
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    })
 })
 
 
-export default store;
+export const persistor = persistStore(store)
