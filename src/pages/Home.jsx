@@ -3,6 +3,7 @@ import Typewriter from "typewriter-effect";
 import IconBtn from "../components/common/IconBtn";
 import { FaClipboard, FaPhone } from "react-icons/fa";
 import Footer from "../components/common/Footer";
+import Accordion from "../components/core/Accordion/Accordion";
 
 const Home = () => {
   const [introData, setIntroData] = useState(null);
@@ -69,6 +70,7 @@ const Home = () => {
           icon={<FaClipboard />}
         />
       </div>
+      <Accordion/>
       <Footer/>
     </div>
   );
