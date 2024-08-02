@@ -3,9 +3,14 @@ import ProjectCard from "../components/core/Project";
 import Footer from "../components/common/Footer";
 
 const Projects = () => {
-  const [projects, setProjects] = useState("");
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [selectedTags, setSelectedTags] = useState(["All"]);
+  const [availableTags, setAvailableTags] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 2;
+
   console.log(projects);
 
   const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -19,6 +24,8 @@ const Projects = () => {
           setError(false);
           setLoading(false);
           setProjects(data.data.projects);
+          const tags = data.data.projects.flatMap(project => project.projectTechnologies);
+          setAvailableTags(["All", ...new Set(tags)]);
         }
       } catch (error) {
         console.log(error.message);
@@ -26,14 +33,54 @@ const Projects = () => {
     };
     fetchData();
   }, []);
+
+  const handleTagClick = (tag) => {
+    setCurrentPage(1);  // Reset to the first page when filtering
+    if (tag === "All") {
+      setSelectedTags(["All"]);
+    } else {
+      const newSelectedTags = selectedTags.includes(tag)
+        ? selectedTags.filter(t => t !== tag)
+        : [...selectedTags.filter(t => t !== "All"), tag];
+      setSelectedTags(newSelectedTags.length > 0 ? newSelectedTags : ["All"]);
+    }
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, Math.ceil(filteredProjects.length / pageSize)));
+  };
+
+  const filteredProjects = selectedTags.includes("All")
+    ? projects
+    : projects.filter(project =>
+        selectedTags.every(tag => project.projectTechnologies.includes(tag))
+      );
+
+  const paginatedProjects = filteredProjects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
   return (
     <div>
       <h1 className="text-[48px] font-semibold ">Projects</h1>
       <p className="text-[16px] font-medium">My Own Creation and Experience I have Put on to develop this!</p>
+      <div className="flex flex-wrap gap-2 my-4">
+        {availableTags.map((tag, index) => (
+          <button
+            key={index}
+            className={`px-6 py-1 border capitalize rounded-md ${selectedTags.includes(tag) ? 'bg-blue-500 text-white' : 'bg-green-500'}`}
+            onClick={() => handleTagClick(tag)}
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
       <div>
-        {projects &&
-          projects.length > 0 &&
-          projects.map((project) => (
+        {paginatedProjects &&
+          paginatedProjects.length > 0 &&
+          paginatedProjects.map((project) => (
             <ProjectCard
               key={project._id}
               id={project._id}
@@ -44,7 +91,23 @@ const Projects = () => {
             />
           ))}
       </div>
-      <Footer/>
+      <div className="flex justify-center my-4">
+        <button
+          className="px-6 py-2 mx-2 text-lg rounded-md bg-green-400"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <button
+          className="px-6 py-2 mx-2 text-lg  rounded-md bg-green-400"
+          onClick={handleNextPage}
+          disabled={currentPage === Math.ceil(filteredProjects.length / pageSize)}
+        >
+          Next
+        </button>
+      </div>
+      <Footer />
     </div>
   );
 };
