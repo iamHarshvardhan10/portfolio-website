@@ -5,6 +5,7 @@ import { FaClipboard, FaPhone } from "react-icons/fa";
 import Footer from "../components/common/Footer";
 import Accordion from "../components/core/Accordion/Accordion";
 import ProjectCard from "../components/core/Project";
+import Loading from "../components/common/Loading";
 
 const Home = () => {
   const [introData, setIntroData] = useState(null);
@@ -41,7 +42,7 @@ const Home = () => {
 
   return (
     <div className="px-[48px]">
-      {loading && <p>Loading...</p>}
+      {loading && <Loading/>}
       {error && <p>There was an error fetching the data.</p>}
       {introData && (
         <>
@@ -80,7 +81,7 @@ const Home = () => {
           <h2 className="my-10 text-xl font-semibold">What's New</h2>
           <div className="my-4">
             {project &&
-              project
+              [...project]
                 .reverse()
                 .slice(0, 2)
                 .map((card) => {
