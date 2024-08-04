@@ -15,7 +15,7 @@ const app = express()
 app.use(express.json())
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: "https://harshdevcodes-portfolio-okys3vbdc.vercel.app/",
         credentials: true
     }))
 // file upload
