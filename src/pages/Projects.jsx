@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../components/core/Project";
 import Footer from "../components/common/Footer";
+import Loading from "../components/common/Loading";
+import toast, { Toaster } from "react-hot-toast";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -24,7 +26,9 @@ const Projects = () => {
           setError(false);
           setLoading(false);
           setProjects(data.data.projects);
-          const tags = data.data.projects.flatMap(project => project.projectTechnologies);
+          const tags = data.data.projects.flatMap(
+            (project) => project.projectTechnologies
+          );
           setAvailableTags(["All", ...new Set(tags)]);
         }
       } catch (error) {
@@ -35,13 +39,13 @@ const Projects = () => {
   }, []);
 
   const handleTagClick = (tag) => {
-    setCurrentPage(1);  // Reset to the first page when filtering
+    setCurrentPage(1); // Reset to the first page when filtering
     if (tag === "All") {
       setSelectedTags(["All"]);
     } else {
       const newSelectedTags = selectedTags.includes(tag)
-        ? selectedTags.filter(t => t !== tag)
-        : [...selectedTags.filter(t => t !== "All"), tag];
+        ? selectedTags.filter((t) => t !== tag)
+        : [...selectedTags.filter((t) => t !== "All"), tag];
       setSelectedTags(newSelectedTags.length > 0 ? newSelectedTags : ["All"]);
     }
   };
@@ -51,26 +55,40 @@ const Projects = () => {
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, Math.ceil(filteredProjects.length / pageSize)));
+    setCurrentPage((prevPage) =>
+      Math.min(prevPage + 1, Math.ceil(filteredProjects.length / pageSize))
+    );
   };
 
   const filteredProjects = selectedTags.includes("All")
     ? projects
-    : projects.filter(project =>
-        selectedTags.every(tag => project.projectTechnologies.includes(tag))
+    : projects.filter((project) =>
+        selectedTags.every((tag) => project.projectTechnologies.includes(tag))
       );
 
-  const paginatedProjects = filteredProjects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  const paginatedProjects = filteredProjects.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   return (
     <div>
+      {loading && <Loading />}
+      {error && toast.error("Error While Fetching Data")}
+      <Toaster />
       <h1 className="text-[48px] font-semibold ">Projects</h1>
-      <p className="text-[16px] font-medium">My Own Creation and Experience I have Put on to develop this!</p>
+      <p className="text-[16px] font-medium">
+        My Own Creation and Experience I have Put on to develop this!
+      </p>
       <div className="flex flex-wrap gap-2 my-4">
         {availableTags.map((tag, index) => (
           <button
             key={index}
-            className={`px-6 py-1 border capitalize rounded-md ${selectedTags.includes(tag) ? 'bg-blue-500 text-white' : 'bg-green-500'}`}
+            className={`px-6 py-1 border capitalize rounded-md ${
+              selectedTags.includes(tag)
+                ? "bg-blue-500 text-white"
+                : "bg-green-500"
+            }`}
             onClick={() => handleTagClick(tag)}
           >
             {tag}
@@ -102,7 +120,9 @@ const Projects = () => {
         <button
           className="px-6 py-2 mx-2 text-lg  rounded-md bg-green-400"
           onClick={handleNextPage}
-          disabled={currentPage === Math.ceil(filteredProjects.length / pageSize)}
+          disabled={
+            currentPage === Math.ceil(filteredProjects.length / pageSize)
+          }
         >
           Next
         </button>

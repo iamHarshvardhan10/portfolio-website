@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Footer from "../components/common/Footer";
+import Loading from "../components/common/Loading";
+import toast, { Toaster } from "react-hot-toast";
 
 const Stack = () => {
   const [stack, setStack] = useState("");
@@ -28,6 +30,9 @@ const Stack = () => {
   }, []);
   return (
     <div className="px-[36px]">
+      {loading && <Loading />}
+      {error && toast.error("Error While Fetching Data")}
+      <Toaster />
       <h1 className="text-[48px] font-semibold">Stack</h1>
       <p className="text-[16px] mt-[24px] font-medium">
         TechStack / Tools i use & love that you should check out.
@@ -46,13 +51,17 @@ const Stack = () => {
                 className="w-[50px] h-[50px] rounded-md border bg-gray-950 object-fill"
               />
               <div>
-                <h2 className="text-[14px] uppercase font-bold">{stack.stackName}</h2>
-                <p className="text-[12px] text-[#747679] capitalize font-semibold">{stack.stackDescription}</p>
+                <h2 className="text-[14px] uppercase font-bold">
+                  {stack.stackName}
+                </h2>
+                <p className="text-[12px] text-[#747679] capitalize font-semibold">
+                  {stack.stackDescription}
+                </p>
               </div>
             </div>
           ))}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

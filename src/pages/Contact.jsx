@@ -3,16 +3,23 @@ import { useEffect } from "react";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import IconBtn from "../components/common/IconBtn";
 import Footer from "../components/common/Footer";
+import Loading from "../components/common/Loading";
+import toast, { Toaster } from "react-hot-toast";
 const Contact = () => {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
   const [contactData, setContactData] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   console.log(contactData);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
+        setError(false);
         const res = await fetch(`${apiURL}/api/portfolio/getportfolio`);
         const data = await res.json();
         if (res.ok) {
+          setLoading(false);
           setContactData(data);
         }
       } catch (error) {
@@ -23,6 +30,9 @@ const Contact = () => {
   }, []);
   return (
     <>
+      {loading && <Loading />}
+      {error && toast.error("Error While Fetching Data")}
+      <Toaster />
       <div className="max-w-[1029px] max-h-screen  px-[48px] py-[48px] border rounded-3xl bg-black bg-opacity-95">
         <div className="flex flex-col items-center justify-center ">
           <img
@@ -45,7 +55,7 @@ const Contact = () => {
           </p>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

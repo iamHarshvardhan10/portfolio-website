@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import BlogCard from "../components/core/Blog/BlogCard";
 import { formatDate } from "../utils/formatDate";
 import Footer from "../components/common/Footer";
+import Loading from "../components/common/Loading";
+import toast, { Toaster } from "react-hot-toast";
 
 const Writing = () => {
   const [blogData, setBloData] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const apiURL = import.meta.env.VITE_API_BASE_URL;
-  console.log(blogData);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +23,6 @@ const Writing = () => {
           setBloData(data.data.blogs);
         }
       } catch (error) {
-        console.log(error.message);
         setError(error.message);
       }
     };
@@ -31,6 +31,9 @@ const Writing = () => {
 
   return (
     <div>
+      {loading && <Loading />}
+      {error && toast.error("Error While Fetching Data")}
+      <Toaster />
       <h2 className="text-[48px] font-semibold">Writing</h2>
       <p className="text-[16px] font-medium">
         sometimes I also writes some useful things
@@ -49,7 +52,7 @@ const Writing = () => {
             />
           ))}
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

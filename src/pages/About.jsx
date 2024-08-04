@@ -2,6 +2,8 @@ import { useState } from "react";
 import aboutImageBanner from "../assets/aboutImageBanner.jpeg";
 import { useEffect } from "react";
 import Footer from "../components/common/Footer";
+import Loading from "../components/common/Loading";
+import toast, { Toaster } from "react-hot-toast";
 
 const About = () => {
   const [aboutData, setAboutData] = useState("");
@@ -27,6 +29,9 @@ const About = () => {
   return (
     <>
       <div className="px-[24px]">
+        {loading && <Loading />}
+        {error && toast.error("Error While Fetching Data")}
+        <Toaster />
         <h1 className="text-[48px] font-semibold">About Harshvardhan</h1>
         <p className="text-[16px] font-medium mt-[16px]">{aboutData?.title}</p>
         <img
@@ -38,7 +43,7 @@ const About = () => {
           {aboutData?.aboutContent}
         </p>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
