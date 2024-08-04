@@ -46,27 +46,27 @@ export const FOLLOW = [
 
             {
                 name: 'Twitter',
-                path: 'https://twitter.com/andrewjgill',
+                path: 'https://twitter.com/harsh.devcodes',
                 icon: "FaTwitter"
             },
             {
                 name: 'Instagram',
-                path: 'https://www.instagram.com/andrewjgill/',
+                path: 'https://www.instagram.com/iamharshvardhan10/',
                 icon: "FaInstagram"
             },
             {
                 name: 'Github',
-                path: 'https://github.com/andrewjgill',
+                path: 'https://github.com/iamHarshvardhan10',
                 icon: "FaGithub"
             },
             {
                 name: 'YouTube',
-                path: 'https://www.youtube.com/channel/UC7QY7j3Z6',
+                path: 'https://www.youtube.com/@harsh.devcodes',
                 icon: "FaYoutube"
             },
             {
                 name: 'LinkedIn',
-                path: 'https://www.linkedin.com/in/andrewjgill',
+                path: 'https://www.linkedin.com/in/harshvardhan-bhosale-6a7688240?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
                 icon: "FaLinkedin"
             }
         ]
