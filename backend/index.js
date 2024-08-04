@@ -15,7 +15,7 @@ const app = express()
 app.use(express.json())
 app.use(
     cors({
-        origin: "https://harshdevcodes-portfolio-harshvardhans-projects-887dcffd.vercel.app/",
+        origin: "https://harshdevcodes-portfolio-harshvardhans-projects-887dcffd.vercel.app",
         credentials: true
     }))
 // file upload
