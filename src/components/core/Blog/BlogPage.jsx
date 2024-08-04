@@ -4,6 +4,8 @@ import IconBtn from "../../common/IconBtn";
 import { VscArrowLeft, VscHeart, VscPreview } from "react-icons/vsc";
 import { FaGithub } from "react-icons/fa";
 import { formatDate } from "../../../utils/formatDate";
+import Loading from "../../common/Loading";
+import toast, { Toaster } from "react-hot-toast";
 const BlogPage = () => {
   const { blogId } = useParams();
   const [blogData, setBlogData] = useState("");
@@ -36,6 +38,9 @@ const BlogPage = () => {
 
   return (
     <div>
+      {loading && <Loading />}
+      {error && toast.error("Error While Fetching Data")}
+      <Toaster />
       <IconBtn
         onClick={handleNavigate}
         type={"button"}
@@ -57,7 +62,9 @@ const BlogPage = () => {
           className="mt-[32px] rounded-xl border min-w-[750px]"
         />
         <div className="my-4 mx-4">
-          <span className="border px-2 py-2 rounded-md bg-purple-600">#{blogData?.blogTag}</span>
+          <span className="border px-2 py-2 rounded-md bg-purple-600">
+            #{blogData?.blogTag}
+          </span>
         </div>
         <p className="text-md my-8 text-gray-400 text-start">
           {blogData?.blogDescription}
