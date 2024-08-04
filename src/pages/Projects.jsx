@@ -8,7 +8,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [selectedTags, setSelectedTags] = useState(["All"]);
+  const [selectedTag, setSelectedTag] = useState("All");
   const [availableTags, setAvailableTags] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 2;
@@ -40,14 +40,7 @@ const Projects = () => {
 
   const handleTagClick = (tag) => {
     setCurrentPage(1); // Reset to the first page when filtering
-    if (tag === "All") {
-      setSelectedTags(["All"]);
-    } else {
-      const newSelectedTags = selectedTags.includes(tag)
-        ? selectedTags.filter((t) => t !== tag)
-        : [...selectedTags.filter((t) => t !== "All"), tag];
-      setSelectedTags(newSelectedTags.length > 0 ? newSelectedTags : ["All"]);
-    }
+    setSelectedTag(tag);
   };
 
   const handlePrevPage = () => {
@@ -60,10 +53,10 @@ const Projects = () => {
     );
   };
 
-  const filteredProjects = selectedTags.includes("All")
+  const filteredProjects = selectedTag === "All"
     ? projects
     : projects.filter((project) =>
-        selectedTags.every((tag) => project.projectTechnologies.includes(tag))
+        project.projectTechnologies.includes(selectedTag)
       );
 
   const paginatedProjects = filteredProjects.slice(
@@ -85,7 +78,7 @@ const Projects = () => {
           <button
             key={index}
             className={`px-6 py-1 border capitalize rounded-md ${
-              selectedTags.includes(tag)
+              selectedTag === tag
                 ? "bg-blue-500 text-white"
                 : "bg-green-500"
             }`}
@@ -118,7 +111,7 @@ const Projects = () => {
           Prev
         </button>
         <button
-          className="px-6 py-2 mx-2 text-lg  rounded-md bg-green-400"
+          className="px-6 py-2 mx-2 text-lg rounded-md bg-green-400"
           onClick={handleNextPage}
           disabled={
             currentPage === Math.ceil(filteredProjects.length / pageSize)
